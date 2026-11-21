@@ -22,7 +22,7 @@ Jede App hat zusätzlich eine eigene Datei (z. B. `ARBEITSWEISE.md` im Repo `gra
 | `lightning` | Lightning | Live-Checks und Exit-Tickets, «Invite only · Demo frei» |
 | `zeitstrahl` | Zeitstrahl | Geschichte/RZG, noch nicht auf der Website |
 | `tensetrainer` | Tense Trainer | Englisch-Zeitformen |
-| `englishlab` | EnglishLab | Englisch-Grammatik mit Theorie, Übungen (A/B/C), Suche, Wörterbuch, Lehrerbereich mit Folien; Kachel «Demnächst» ohne Link (Repo noch anzulegen) |
+| `englishlab` | EnglishLab | Englisch-Grammatik mit Theorie, Übungen (A/B/C), Suche, Wörterbuch, Lehrerbereich mit Folien; Kachel aktiv mit Öffnen, Demo und QR; Version 1.1 mit Vokabeltrainer |
 | `caroule` | Ça roule | Französisch-Zeitformen, Kachel zunächst «Demnächst» ohne Link |
 | `piano-levels` | Piano Levels | Platzhalter-Kachel (demnächst) |
 
