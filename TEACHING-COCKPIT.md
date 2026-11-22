@@ -41,3 +41,8 @@ Jede App hat zusätzlich eine eigene Datei (z. B. `ARBEITSWEISE.md` im Repo `gra
 
 - Zeitstrahl: Entwurf im Zweig `entwurf-datum-ausfuehrlich` (Datum zur Jahreszahl, ausführlicher Text, PDF-Export, Teilen nur als Ansicht). Kachel noch offen (Fach «Fachübergreifend» oder «RZG/Geschichte»).
 - Grammatik Trainer: Inhalte Thema für Thema nach den Unterrichtsunterlagen. Stand siehe `ARBEITSWEISE.md` im Repo `grammatik-trainer`.
+
+## Datenschutz
+
+- Seite `datenschutz.html` (Stand 22.11.2026, vorläufig `noindex`, ohne Namen; Kontakt über «Feedback»). Entwurf und Hinweise: Projekt-Dokument `datenschutz-entwurf-2026-11-22.md`.
+- Noch offen: Link «Datenschutz» im Fuss der Startseite (sobald die Hauptseite wieder aktiv ist) und in den Apps; eigene E-Mail-Adresse und Namen ergänzen, dann `noindex` entfernen; Schriften und Skripte selbst hosten.
