@@ -1,6 +1,6 @@
 # Fitness-Timer: Arbeitsweise
 
-Private App, nicht Teil des Unterrichts. Auf der Website (Teaching Cockpit) nur als eigene Kachel, ohne Schul- oder Personenbezug.
+Private App nur für Kevins eigenes Training. Gehört nicht zum Teaching Cockpit: nicht auf der Startseite, keine Kachel, kein QR. Erreichbar nur über den direkten Link (`noindex`).
 
 ## Entscheide (23.11.2026)
 - Ohne Bilder, nur Textbeschreibungen.
@@ -18,4 +18,3 @@ Private App, nicht Teil des Unterrichts. Auf der Website (Teaching Cockpit) nur 
 
 ## Offen
 - Auf Geräten testen (Samsung Galaxy S25+, Tab, iPad): Ton, Vibration, Sprachansage, Bildschirm bleibt an.
-- Kachel auf der Website erst, wenn die Startseite wieder aktiv ist.

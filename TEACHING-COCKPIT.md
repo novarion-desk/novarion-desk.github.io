@@ -25,7 +25,7 @@ Jede App hat zusätzlich eine eigene Datei (z. B. `ARBEITSWEISE.md` im Repo `gra
 | `englishlab` | EnglishLab | Englisch-Grammatik mit Theorie, Übungen (A/B/C), Suche, Wörterbuch, Lehrerbereich mit Folien; Kachel aktiv mit Öffnen, Demo und QR; Version 1.1 mit Vokabeltrainer |
 | `caroule` | Ça roule | Französisch-Zeitformen, Kachel zunächst «Demnächst» ohne Link |
 | `piano-levels` | Piano Levels | Platzhalter-Kachel (demnächst) |
-| `fitness-timer/` (Unterordner dieses Repos) | Fitness-Timer | Private Fitness-App (Intervall-Timer: Warm-up, Training, Cooldown), nicht für den Unterricht. Eigene Kachel erst, wenn die Startseite wieder aktiv ist; ohne Schul- oder Personenbezug. Daten nur lokal, kein Firebase |
+| `fitness-timer/` (Unterordner dieses Repos) | Fitness-Timer | Private Trainings-App, gehört nicht zum Teaching Cockpit. Nicht auf der Startseite, keine Kachel, kein QR. Nur direkter Link; `noindex`. Daten nur lokal, kein Firebase |
 
 ## Gemeinsame Regeln
 
