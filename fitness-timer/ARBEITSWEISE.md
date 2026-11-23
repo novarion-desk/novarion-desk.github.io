@@ -18,3 +18,7 @@ Private App nur für Kevins eigenes Training. Gehört nicht zum Teaching Cockpit
 
 ## Offen
 - Auf Geräten testen (Samsung Galaxy S25+, Tab, iPad): Ton, Vibration, Sprachansage, Bildschirm bleibt an.
+
+## Übungsliste
+- Standard-Übungen stehen in `DEF` (index.html). Neue Standard-Übungen: `libv` in `init()` und `mig()` erhöhen, dann werden fehlende Übungen bei bestehenden Geräten ergänzt (nichts wird gelöscht).
+- Auswahl vom 23.11.2026 ist eingebaut (Beine, Oberkörper, Rumpf, Cardio, Warm-up, Cooldown).
