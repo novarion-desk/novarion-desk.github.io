@@ -179,7 +179,7 @@ lib:{warmup:DEF.warmup.map(x=>({...x})),training:DEF.training.map(x=>({...x})),c
 saved:[],hist:[],weekplan:{},libv:2}}
 const KEY='fitnesstimer.v2';
 function mig(o){if((o.libv||0)<2){['warmup','training','cooldown'].forEach(a=>{o.lib[a]=o.lib[a]||[];DEF[a].forEach(x=>{if(!o.lib[a].some(y=>y.n===x.n))o.lib[a].push({...x})})});o.libv=2}return o}
-function load(){try{const j=JSON.parse(localStorage.getItem(KEY));if(j&&j.areas){const b=init();return mig(Object.assign(b,j,{set:Object.assign(b.set,j.set||{})}))}}catch(e){}return null}
+function load(){try{const j=JSON.parse(localStorage.getItem(KEY));if(j&&j.areas){const b=init();return mig(Object.assign(b,j,{libv:j.libv||0,set:Object.assign(b.set,j.set||{})}))}}catch(e){}return null}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
 let st=load()||init(),cur='training',openId=null,edit=false,view='home',run=null,tm=null,AC=null,wl=null;
 
@@ -287,7 +287,7 @@ function act(a,d){
  case 'export':$('#bk').value=JSON.stringify(st);return;
  case 'copy':{const v=JSON.stringify(st);$('#bk').value=v;try{navigator.clipboard.writeText(v).then(()=>toast('Kopiert'),()=>toast('Text markieren und kopieren'))}catch(e){toast('Text markieren und kopieren')}return}
  case 'dl':{try{const b=new Blob([JSON.stringify(st)],{type:'application/json'}),l=document.createElement('a');l.href=URL.createObjectURL(b);l.download='fitness-timer-sicherung.json';document.body.appendChild(l);l.click();l.remove()}catch(e){toast('Download nicht möglich, nutze Kopieren')}return}
- case 'import':{try{const j=JSON.parse($('#bk').value);if(!j.areas)throw 0;st=mig(Object.assign(init(),j,{set:Object.assign(init().set,j.set||{})}));save();theme();toast('Eingespielt')}catch(e){return toast('Text ist keine gültige Sicherung')}break}
+ case 'import':{try{const j=JSON.parse($('#bk').value);if(!j.areas)throw 0;st=mig(Object.assign(init(),j,{libv:j.libv||0,set:Object.assign(init().set,j.set||{})}));save();theme();toast('Eingespielt')}catch(e){return toast('Text ist keine gültige Sicherung')}break}
  }
  save();if(view==='menu')renderMenu();else render();
 }
