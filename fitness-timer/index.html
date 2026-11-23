@@ -210,6 +210,8 @@ function render(){
  if(st.set.week){const day=(new Date().getDay()+6)%7,sv=st.saved.find(x=>x.id===st.weekplan[day]);
   if(sv)wk=`<div class="card"><span class="sm">Heute im Wochenplan</span><div class="two" style="align-items:center"><b>${esc(sv.name)}</b><button data-a="loadsaved" data-id="${sv.id}">Laden</button></div></div>`}
  $('#main').innerHTML=`${wk}
+ <div class="card"><div class="sm">Meine Abläufe</div><div class="chips" style="margin-top:6px">${st.saved.map(v=>`<button class="chip" data-a="loadsaved" data-id="${v.id}">${esc(v.name)} <span class="sm">${AN[v.area]}</span></button>`).join('')||'<span class="sm">Noch keine. Unten im Ablauf speichern.</span>'}</div>
+ <div class="sm" style="margin-top:10px">Vorlagen</div><div class="chips" style="margin-top:6px">${TPL.map((t,i)=>`<button class="chip" data-a="tpl" data-i="${i}">${esc(t.name)}</button>`).join('')}</div></div>
  <div class="tabs">${Object.keys(AN).map(k=>`<button data-a="tab" data-k="${k}" class="${k===cur?'on':''}">${AN[k]}</button>`).join('')}</div>
  <div class="card">${stp('Trainingszeit',A.work+' s','def','work',5)}${stp('Pause',A.rest+' s','def','rest',5)}${stp('Runden',A.rounds,'def','rounds',1)}${stp('Start in',st.set.prep?st.set.prep+' s':'sofort','setn','prep',5)}</div>
  <h2>Übungen hinzufügen</h2>
@@ -219,7 +221,7 @@ function render(){
  <div class="st"><label style="flex:1"><input type="checkbox" id="ns" style="width:auto;min-height:0"> Seitenwechsel möglich (links, dann rechts)</label><button data-a="libnew">Hinzufügen</button></div></div>
  <h2>Ablauf (${A.plan.length})</h2>
  <div id="plan">${A.plan.map(it=>planRow(it,A)).join('')||'<div class="sm">Noch keine Übungen. Tippe oben auf eine Übung.</div>'}</div>
- ${A.plan.length?'<button class="lnk" data-a="clear">Ablauf leeren</button>':''}`;
+ ${A.plan.length?'<button class="lnk" data-a="clear">Ablauf leeren</button><h2>Ablauf speichern</h2><div class="two"><input id="sn2" placeholder="Name, z. B. Montag Beine"><button data-a="save" style="flex:0 0 auto">Speichern</button></div><div class="sm" style="margin-top:4px">Gleicher Name und Bereich überschreibt den gespeicherten Ablauf.</div>':''}`;
  $('#binfo').textContent=A.plan.length?`${A.plan.length} Übungen · ${A.rounds} Runden · ${fmt(tot)} min`:'Füge Übungen hinzu';
 }
 function planRow(it,A){
@@ -233,9 +235,7 @@ function renderMenu(){
  const P=st.set,tg=(l,k)=>`<div class="st"><span>${l}</span><button class="tg ${P[k]?'on':''}" data-a="tog" data-k="${k}">${P[k]?'Ein':'Aus'}</button></div>`;
  const days=['Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag','Sonntag'];
  $('#menu').innerHTML=`<div class="top"><h1>Mehr</h1><button data-a="back">Zurück</button></div>
- <h2>Vorlagen</h2>${TPL.map((t,i)=>`<button style="width:100%;text-align:left;margin:3px 0" data-a="tpl" data-i="${i}">${esc(t.name)}<div class="sm">${AN[t.area]} · ${t.work}/${t.rest} s · ${t.rounds} Runden</div></button>`).join('')}
- <h2>Gespeicherte Trainings</h2>
- <div class="two"><input id="sn" placeholder="Name"><button data-a="save" style="flex:0 0 auto">Aktuellen Ablauf speichern (${AN[cur]})</button></div>
+ <h2>Gespeicherte Abläufe</h2>
  ${st.saved.map(s=>`<div class="row"><div class="rb"><div class="rn">${esc(s.name)}</div><div class="sm">${AN[s.area]} · ${s.plan.length} Übungen · ${s.rounds} Runden</div></div><button data-a="loadsaved" data-id="${s.id}">Laden</button><button data-a="delsaved" data-id="${s.id}">✕</button></div>`).join('')||'<div class="sm" style="margin-top:6px">Noch nichts gespeichert.</div>'}
  <h2>Verlauf</h2>${st.hist.slice(0,20).map(h=>`<div class="st"><span>${new Date(h.ts).toLocaleDateString('de-CH',{weekday:'short',day:'numeric',month:'numeric'})} ${new Date(h.ts).toLocaleTimeString('de-CH',{hour:'2-digit',minute:'2-digit'})}</span><span class="sm">${AN[h.area]} · ${h.min} min</span></div>`).join('')||'<div class="sm">Noch keine Einheiten.</div>'}
  ${st.hist.length?'<button class="lnk" data-a="clearhist">Verlauf löschen</button>':''}
@@ -279,8 +279,10 @@ function act(a,d){
  case 'setn':{st.set[d.k]=Math.max(0,Math.min(180,st.set[d.k]+ +d.d));break}
  case 'theme':st.theme={auto:'light',light:'dark',dark:'auto'}[st.theme];theme();break;
  case 'tpl':{const t=TPL[+d.i];st.areas[t.area]=Object.assign({},st.areas[t.area],{work:t.work,rest:t.rest,rounds:t.rounds,plan:mk(t.area,t.ex)});cur=t.area;save();setView('home');return toast('Vorlage geladen')}
- case 'save':{const n=$('#sn').value.trim();if(!n)return toast('Name eingeben');
-  st.saved.push({id:uid(),name:n,area:cur,work:A.work,rest:A.rest,rounds:A.rounds,plan:JSON.parse(JSON.stringify(A.plan))});break}
+ case 'save':{const n=$('#sn2').value.trim();if(!n)return toast('Name eingeben');if(!A.plan.length)return toast('Ablauf ist leer');
+  const o={name:n,area:cur,work:A.work,rest:A.rest,rounds:A.rounds,plan:JSON.parse(JSON.stringify(A.plan))};
+  const ex=st.saved.find(x=>x.area===cur&&x.name.toLowerCase()===n.toLowerCase());
+  if(ex){Object.assign(ex,o);toast('Aktualisiert')}else{st.saved.push({id:uid(),...o});toast('Gespeichert')}break}
  case 'loadsaved':{const s=st.saved.find(x=>x.id===d.id);if(!s)return;st.areas[s.area]={work:s.work,rest:s.rest,rounds:s.rounds,plan:JSON.parse(JSON.stringify(s.plan)).map(x=>({...x,id:uid()}))};cur=s.area;save();setView('home');return toast('Geladen')}
  case 'delsaved':st.saved=st.saved.filter(x=>x.id!==d.id);break;
  case 'clearhist':st.hist=[];break;
