@@ -20,5 +20,6 @@ Private App nur für Kevins eigenes Training. Gehört nicht zum Teaching Cockpit
 - Auf Geräten testen (Samsung Galaxy S25+, Tab, iPad): Ton, Vibration, Sprachansage, Bildschirm bleibt an.
 
 ## Übungsliste
-- Standard-Übungen stehen in `DEF` (index.html). Neue Standard-Übungen: `libv` in `init()` und `mig()` erhöhen, dann werden fehlende Übungen bei bestehenden Geräten ergänzt (nichts wird gelöscht).
+- Standard-Übungen stehen in `DEF` (index.html). Neue Standard-Übungen: `libv` in `init()` und `mig()` erhöhen (aktuell 3), dann werden fehlende Übungen bei bestehenden Geräten ergänzt (nichts wird gelöscht).
 - Auswahl vom 23.11.2026 ist eingebaut (Beine, Oberkörper, Rumpf, Cardio, Warm-up, Cooldown).
+- Zweiseitige Übungen (Flag `s`, immer links und rechts): alle Dehnungen, Ausfallschritte (alle Varianten), Step-ups, Bulgarian Split Squats, einbeinige Übungen, Seitstütz, Unterarmstütz mit Beinheben, Beinpendeln, Hüftöffner. Wechselnde Übungen (Skater, Mountain Climbers, Bicycle Crunches) zählen als eine Übung.

@@ -90,7 +90,7 @@ const DEF={
 training:[
 E('Squats','Füsse schulterbreit, Gesäss nach hinten unten, Knie über den Füssen, Rücken gerade.'),
 E('Liegestütze','Hände unter den Schultern, Körper in einer Linie, Brust Richtung Boden. Leichter: Knie am Boden.'),
-E('Ausfallschritte','Grosser Schritt nach vorn, hinteres Knie Richtung Boden, Oberkörper aufrecht.',0,1),
+E('Ausfallschritte','Grosser Schritt nach vorn, hinteres Knie Richtung Boden, Oberkörper aufrecht. Erst eine Seite, dann die andere.',1),
 E('Plank','Unterarmstütz, Körper in einer Linie, Bauch und Gesäss anspannen.'),
 E('Hampelmänner','Sprung mit Armen und Beinen auseinander, dann zurück.'),
 E('Mountain Climbers','Liegestützposition, Knie abwechselnd schnell Richtung Brust ziehen.'),
@@ -98,14 +98,14 @@ E('Burpees','Kniebeuge, Beine nach hinten springen, zurück, hochspringen.'),
 E('Crunches','Rückenlage, Beine angewinkelt, Schultern Richtung Hüfte anheben, Nacken locker.'),
 E('Glute Bridge','Rückenlage, Füsse aufgestellt, Becken anheben, oben Gesäss anspannen.'),
 E('Dips (Stuhl)','Hände auf der Stuhlkante hinter dir, Ellbogen beugen und strecken.'),
-E('Step-ups (Stuhl)','Abwechselnd auf einen stabilen Stuhl steigen und wieder hinunter.'),
+E('Step-ups (Stuhl)','Mit einem Bein auf einen stabilen Stuhl steigen und wieder hinunter. Danach Seite wechseln.',1),
 E('High Knees','Auf der Stelle laufen, Knie hoch anheben.'),
 E('Wandsitzen','Rücken an der Wand, Knie etwa 90 Grad, Position halten.'),
 E('Superman','Bauchlage, Arme und Beine leicht anheben, kurz halten.'),
 E('Russian Twists','Sitzen, Oberkörper leicht zurück, Rumpf abwechselnd links und rechts drehen.'),
 E('Seitstütz','Seitlich auf den Unterarm stützen, Körper in einer Linie.',1),
-E('Seitliche Ausfallschritte','Grosser Schritt zur Seite, Gesäss nach hinten, das andere Bein bleibt gestreckt, Füsse zeigen nach vorn.',0,1),
-E('Rückwärts-Ausfallschritte','Grosser Schritt nach hinten, vorderes Knie über dem Fuss, Oberkörper aufrecht.',0,1),
+E('Seitliche Ausfallschritte','Grosser Schritt zur Seite, Gesäss nach hinten, das andere Bein bleibt gestreckt, Füsse zeigen nach vorn.',1),
+E('Rückwärts-Ausfallschritte','Grosser Schritt nach hinten, vorderes Knie über dem Fuss, Oberkörper aufrecht.',1),
 E('Bulgarian Split Squats','Hinterer Fuss auf einem Stuhl, vorderes Bein beugt, Oberkörper aufrecht. Danach Seite wechseln.',1),
 E('Einbeinige Glute Bridge','Rückenlage, ein Bein gestreckt in der Luft, Becken mit dem anderen Fuss anheben.',1),
 E('Sumo-Squats','Füsse weit auseinander, Zehen nach aussen, tief beugen, Knie folgen den Zehen.'),
@@ -117,7 +117,7 @@ E('Bicycle Crunches','Rückenlage, abwechselnd Ellbogen zum gegenüberliegenden 
 E('Flutter Kicks','Rückenlage, Beine leicht anheben und abwechselnd klein auf und ab bewegen, unterer Rücken bleibt am Boden.'),
 E('Sit-ups','Rückenlage, Füsse aufgestellt, Oberkörper aufrichten und kontrolliert zurück.'),
 E('Toe Touches','Rückenlage, Beine senkrecht nach oben, mit den Händen Richtung Zehen heben.'),
-E('Unterarmstütz mit Beinheben','Unterarmstütz, abwechselnd ein Bein gestreckt anheben, Becken ruhig.',0,1),
+E('Unterarmstütz mit Beinheben','Unterarmstütz, ein Bein gestreckt anheben, Becken ruhig. Danach Seite wechseln.',1),
 E('Anfersen (Butt Kicks)','Auf der Stelle laufen, Fersen schnell zum Gesäss schnellen.'),
 E('Skater','Seitlich von Fuss zu Fuss springen, Standbein beugt, Arme pendeln mit.'),
 E('Schattenboxen','Leicht federnd stehen, abwechselnd Schläge nach vorn, Rumpf dreht mit.'),
@@ -176,9 +176,10 @@ warmup:{work:30,rest:5,rounds:1,plan:mk('warmup',['Armkreisen','Hüftkreisen','M
 training:{work:40,rest:20,rounds:3,plan:mk('training',['Squats','Liegestütze','Mountain Climbers','Plank'])},
 cooldown:{work:30,rest:5,rounds:1,plan:mk('cooldown',['Oberschenkel vorne','Oberschenkel hinten','Wade','Brust','Kindshaltung'])}},
 lib:{warmup:DEF.warmup.map(x=>({...x})),training:DEF.training.map(x=>({...x})),cooldown:DEF.cooldown.map(x=>({...x}))},
-saved:[],hist:[],weekplan:{},libv:2}}
+saved:[],hist:[],weekplan:{},libv:3}}
 const KEY='fitnesstimer.v2';
-function mig(o){if((o.libv||0)<2){['warmup','training','cooldown'].forEach(a=>{o.lib[a]=o.lib[a]||[];DEF[a].forEach(x=>{if(!o.lib[a].some(y=>y.n===x.n))o.lib[a].push({...x})})});o.libv=2}return o}
+function mig(o){if((o.libv||0)<2){['warmup','training','cooldown'].forEach(a=>{o.lib[a]=o.lib[a]||[];DEF[a].forEach(x=>{if(!o.lib[a].some(y=>y.n===x.n))o.lib[a].push({...x})})});o.libv=2}
+ if((o.libv||0)<3){const fix=(a,it)=>{const d=DEF[a].find(y=>y.n===it.n);if(d&&d.s){it.s=true;it.c=true}};['warmup','training','cooldown'].forEach(a=>{(o.lib[a]||[]).forEach(x=>{const d=DEF[a].find(y=>y.n===x.n);if(d){x.s=d.s;x.c=d.c}});((o.areas[a]||{}).plan||[]).forEach(it=>fix(a,it));(o.saved||[]).filter(v=>v.area===a).forEach(v=>(v.plan||[]).forEach(it=>fix(a,it)))});o.libv=3}return o}
 function load(){try{const j=JSON.parse(localStorage.getItem(KEY));if(j&&j.areas){const b=init();return mig(Object.assign(b,j,{libv:j.libv||0,set:Object.assign(b.set,j.set||{})}))}}catch(e){}return null}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
 let st=load()||init(),cur='training',openId=null,edit=false,view='home',run=null,tm=null,AC=null,wl=null;
