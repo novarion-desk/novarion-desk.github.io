@@ -268,7 +268,7 @@ function act(a,d){
  case 'itside':it.s=!it.s;break;
  case 'itdel':A.plan=A.plan.filter(x=>x!==it);openId=null;break;
  case 'open':openId=openId===d.id?null:d.id;break;
- case 'add':{const x=st.lib[cur][+d.i];A.plan.push({id:uid(),n:x.n,d:x.d,s:x.s,c:x.c,work:null,rest:null});break}
+ case 'add':{const x=st.lib[cur][+d.i];if(A.plan.some(p=>p.n===x.n)){A.plan=A.plan.filter(p=>p.n!==x.n);openId=null;break}A.plan.push({id:uid(),n:x.n,d:x.d,s:x.s,c:x.c,work:null,rest:null});break}
  case 'libedit':edit=!edit;break;
  case 'libdel':st.lib[cur].splice(+d.i,1);break;
  case 'libnew':{const n=$('#nn').value.trim();if(!n)return toast('Name eingeben');
