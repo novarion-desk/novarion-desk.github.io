@@ -17,59 +17,67 @@ footer{margin-top:2.4em;padding-top:1em;border-top:1px solid var(--line);color:v
 <p class="lead">Teaching Cockpit ist eine Sammlung kleiner Unterrichts-Apps. Diese Erklärung beschreibt, welche Daten dabei bearbeitet werden, warum und wo sie liegen.</p>
 
 <h2>Verantwortliche Stelle</h2>
-<p>Verantwortlich ist der Betreiber der Apps von Teaching Cockpit. Kontakt: über den Knopf «Feedback» in den Apps. Eine eigene E-Mail-Adresse für Datenschutzanfragen wird hier ergänzt.</p>
+<p>Verantwortlich ist der Betreiber der Apps von Teaching Cockpit. Kontakt: über den Knopf «Feedback» in den Apps (bitte im Formular eine Kontaktmöglichkeit angeben). Eine eigene E-Mail-Adresse für Datenschutzanfragen wird hier ergänzt.</p>
 
 <h2>Grundsatz</h2>
 <p>Wir bearbeiten Personendaten nach dem Schweizer Datenschutzgesetz (revDSG). Es gibt keine Werbung, kein Tracking und keine Analyse-Dienste. Daten werden nur erfasst, wenn eine Funktion sie braucht.</p>
 
 <h2>Apps ohne Anmeldung (Lernen und Üben)</h2>
-<p>Grammatik Trainer, EnglishLab (Üben), Tense Trainer, Ça roule, Notentrainer und die Übungsteile des Zeitstrahls brauchen kein Konto. Fortschritt, Einstellungen und Bestwerte werden nur im Browser auf dem eigenen Gerät gespeichert (<code>localStorage</code>). Diese Daten werden nicht an uns übermittelt. In den Apps lassen sie sich zurücksetzen.</p>
+<p>Grammatik Trainer, EnglishLab (Üben), Tense Trainer, Ça roule, Notentrainer, Piano Levels und die Übungsteile des Zeitstrahls brauchen kein Konto. Fortschritt, Einstellungen und Bestwerte werden nur im Browser auf dem eigenen Gerät gespeichert (<code>localStorage</code>, bei einer laufenden Übungsrunde auch <code>sessionStorage</code>). Diese Daten werden nicht an uns übermittelt. In den Apps lassen sie sich zurücksetzen.</p>
 
 <h2>Lehrpersonen-Konto</h2>
-<p>Für Sek Planer, die Lehrerbereiche der Apps, Lightning, die Cloud-Funktionen des Zeitstrahls und den Zufallsgenerator melden sich Lehrpersonen mit E-Mail-Adresse und Passwort an. Die Registrierung ist nur mit Zugangscode möglich.</p>
-<p>Gespeichert werden je nach App: Stundenplan und Lektionsplanung, Notizen, Klassenlisten, Gruppeneinteilungen, eigene Zeitstrahlen, Lightning-Fragen und Vorlagen sowie Sicherungen dieser Daten.</p>
-<p><b>Speicherort:</b> Google Firebase (Authentication und Firestore) mit Rechenzentrum in Zürich (Region europe-west6). Jedes Konto kann nur die eigenen Daten lesen; die Sicherheitsregeln der Datenbank erzwingen das.</p>
+<p>Für Sek Planer, die Lehrerbereiche der Apps, Lightning, die Cloud-Funktionen des Zeitstrahls und den Zufallsgenerator melden sich Lehrpersonen mit E-Mail-Adresse und Passwort an. Konten werden vom Betreiber auf Anfrage angelegt; eine freie Registrierung gibt es nicht.</p>
+<p>Gespeichert werden je nach App: Stundenplan und Lektionsplanung, Notizen, Klassenlisten (bitte nur Vornamen), Gruppeneinteilungen, eigene Zeitstrahlen, Lightning-Fragen und Vorlagen sowie Sicherungen dieser Daten.</p>
+<p><b>Speicherort:</b> Die Daten liegen in der Datenbank Cloud Firestore (Google Firebase) mit Rechenzentrum in Zürich (Region europe-west6). Jedes Konto kann nur die eigenen Daten lesen; die Sicherheitsregeln der Datenbank erzwingen das. Die Anmeldung (E-Mail-Adresse und verschlüsseltes Passwort) wird von Firebase Authentication (Google) verwaltet. Für diesen Teil können wir keinen Standort in der Schweiz zusichern.</p>
 
 <h2>Schülerinnen und Schüler</h2>
 <p>Schülerinnen und Schüler brauchen kein Konto.</p>
 <ul>
-<li><b>Lightning:</b> Antworten werden unter einem zufälligen Geräteschlüssel gespeichert, zusammen mit dem Namen aus der Klassenliste der Lehrperson, sofern dieser gewählt wird. Die Ergebnisse sieht nur die Lehrperson.</li>
+<li><b>Lightning:</b> Antworten werden unter einem zufälligen Geräteschlüssel gespeichert, zusammen mit dem Vornamen aus der Klassenliste der Lehrperson, sofern dieser gewählt wird. Die Ergebnisse sieht nur die Lehrperson. Sessions und Antworten bleiben 30 Tage gespeichert und werden danach automatisch gelöscht; die Lehrperson kann sie vorher jederzeit selbst löschen oder exportieren.</li>
 <li><b>Zeitstrahl:</b> Bei Abgabe-Aufträgen wird die Abgabe mit dem eingegebenen Namen gespeichert.</li>
 <li><b>Bitte nur Vornamen oder besser Kürzel verwenden</b>, keine Nachnamen und keine weiteren persönlichen Angaben.</li>
+<li><b>«Frag Marty»:</b> siehe KI-Funktionen.</li>
 </ul>
 <div class="box">Setzen Lehrpersonen die Apps im Unterricht ein, ist normalerweise die Schule für die Schülerdaten verantwortlich. Sie legt fest, welche Dienste erlaubt sind, und informiert Schülerinnen, Schüler und Eltern. Die Lehrperson entscheidet, was sie in die Apps eingibt.</div>
 
-<h2>KI-Funktionen (freiwillig, nur Lehrpersonen)</h2>
-<p>Einzelne Apps bieten KI-Hilfen. Sie funktionieren nur, wenn die Lehrperson einen eigenen API-Schlüssel eines Anbieters einträgt (Google Gemini, Anthropic Claude, OpenAI oder Mistral). Der Text, den die Lehrperson eingibt oder auswählt, wird dann direkt vom Browser an den gewählten Anbieter gesendet. Bitte keine Namen oder persönlichen Angaben von Schülerinnen und Schülern eingeben. Es gelten die Datenschutzbestimmungen des jeweiligen Anbieters.</p>
+<h2>KI-Funktionen</h2>
+<p><b>Für Lehrpersonen mit eigenem Schlüssel (freiwillig):</b> Einzelne Apps bieten KI-Hilfen. Trägt die Lehrperson einen eigenen API-Schlüssel eines Anbieters ein (Google Gemini, Anthropic Claude, OpenAI oder Mistral), wird der eingegebene oder ausgewählte Text direkt vom Browser an diesen Anbieter gesendet. Es gelten die Datenschutzbestimmungen des Anbieters.</p>
+<p><b>Gemeinsamer KI-Zugang für Lehrpersonen:</b> Wer mit einem Lehrpersonen-Konto angemeldet ist, kann KI-Hilfen auch ohne eigenen Schlüssel nutzen. Die Anfrage läuft über einen Zwischenserver (Cloudflare Workers, Cloudflare Inc., USA, Rechenzentren weltweit) an Mistral AI (Mistral AI SAS, Frankreich). Der Zwischenserver prüft die Anmeldung, begrenzt die Nutzung pro Person und Tag und schützt den Zugangsschlüssel. Gesendet wird nur der Text, der eingegeben oder ausgewählt wird, und nur, wenn die KI-Funktion gestartet wird. Die KI-Verarbeitung findet nicht in der Schweiz statt.</p>
+<p><b>«Frag Marty» für Schülerinnen und Schüler (Grammatik Trainer und EnglishLab):</b> Nach einer beantworteten Übungsaufgabe kann man bei «Marty», einer KI, eine zusätzliche Erklärung abrufen. Nur auf Klick werden die Aufgabe, die richtige Lösung und gegebenenfalls die eigene Antwort an den Zwischenserver (Cloudflare) und von dort an Mistral AI gesendet. Der Zwischenserver versteckt den Zugangsschlüssel, begrenzt die Nutzung (Tageslimit pro Gerät, Netzwerk und insgesamt) und zählt Anfragen und Datenmengen pro Tag und App. Texte werden dort nicht gespeichert. Zur Begrenzung dienen eine zufällige Geräte-Kennung aus dem Browser (keine Anmeldung, kein Name) und ein verkürzter, nicht rückrechenbarer Wert der IP-Adresse (Hash, höchstens 2 Tage gespeichert). In den Apps steht der Hinweis, dass Marty eine KI ist, sich irren kann und dass keine Namen oder persönlichen Angaben eingegeben werden sollen. Diese Funktion läuft nicht in der Schweiz.</p>
+<p>In allen Fällen: Bitte keine Namen oder persönlichen Angaben von Schülerinnen und Schülern eingeben, höchstens Vornamen oder Kürzel. Es gelten zusätzlich die Datenschutzbestimmungen von Mistral AI und Cloudflare.</p>
 
 <h2>Feedback-Formular</h2>
-<p>Der Knopf «Feedback» öffnet ein externes, anonymes Formular bei Tally (Tally BV, Belgien). Nur wenn jemand das Formular absendet, werden die Angaben übermittelt, zusammen mit App-Name, Version und Gerätetyp. Namen werden nicht abgefragt.</p>
+<p>Der Knopf «Feedback» öffnet ein externes Formular bei Tally (Tally BV, Belgien). Nur wenn jemand das Formular absendet, werden die Angaben übermittelt, zusammen mit App-Name, Version und Gerätetyp. Der Vorname kann freiwillig angegeben werden, damit bei Unklarheiten nachgefragt werden kann; ohne Namen bleibt die Rückmeldung anonym. Bitte nur den Vornamen angeben.</p>
+
+<h2>Sicherung in Google Drive (nur Lehrpersonen, freiwillig)</h2>
+<p>Lehrpersonen können in einigen Apps Sicherungen ihrer Daten in das eigene Google Drive legen oder eine Datei aus dem eigenen Drive wählen. Dazu werden erst beim Klick auf diese Funktion Skripte von Google geladen und die Anmeldung bei Google verlangt (Google, USA). Die Apps erhalten nur Zugriff auf Dateien, die sie selbst anlegen oder die ausgewählt werden.</p>
 
 <h2>Hosting und Server-Logs</h2>
 <p>Die Apps und diese Website werden über GitHub Pages ausgeliefert (GitHub, Inc., Microsoft, USA). Dabei können technische Zugriffsdaten wie IP-Adresse, Browser-Typ und Zeitpunkt anfallen. In den ausgelieferten Dateien selbst liegen keine Personendaten.</p>
 
-<h2>Externe Inhalte, die beim Aufruf geladen werden</h2>
-<p>Beim Laden einiger Apps ruft der Browser Dateien von Dritten ab. Dabei wird die IP-Adresse des Geräts an den jeweiligen Anbieter übermittelt.</p>
+<h2>Externe Inhalte</h2>
+<p>Schriften, Design, Icons und die Firebase-Software liegen in den Apps selbst und werden nicht von Dritten geladen. Folgende Verbindungen zu Dritten gibt es nur bei der jeweiligen Funktion, dabei wird die IP-Adresse des Geräts übermittelt:</p>
 <ul>
-<li><b>Schriften (Google Fonts):</b> Sek Planer, Grammatik Trainer, Zufallsgenerator (Google, USA).</li>
-<li><b>Design-Bibliothek (cdn.tailwindcss.com) und weitere Skripte (unpkg):</b> Notentrainer, Zufallsgenerator.</li>
-<li><b>Zufallsgenerator:</b> Teile der Firebase-Software werden von Googles Server (gstatic.com) geladen.</li>
 <li><b>Wikipedia/Wikimedia:</b> Der Zeitstrahl lädt Bilder und Artikelangaben von Wikimedia (Wikimedia Foundation, USA).</li>
+<li><b>Google Drive:</b> nur bei der Sicherungsfunktion (siehe oben).</li>
+<li><b>KI-Zwischenserver, KI-Anbieter und Feedback-Formular:</b> nur beim Klick auf die jeweilige Funktion (siehe oben).</li>
 <li><b>Wörterbuch-Links in EnglishLab (dict.cc, Linguee):</b> Das sind nur Links. Daten gehen erst bei einem Klick dorthin.</li>
 </ul>
-<p>Wo möglich, werden diese Dateien künftig selbst gehostet.</p>
+
+<h2>Update-Prüfung und Offline-Nutzung</h2>
+<p>Die Apps speichern ihre Programmdateien im Browser (Service Worker), damit sie auch ohne Internetverbindung starten. Im Hintergrund fragen sie beim eigenen Server ab, ob eine neue Version vorliegt (nur Dateikennungen, keine Personendaten), und zeigen dann die Meldung «Neue Version verfügbar».</p>
 
 <h2>Übermittlung ins Ausland</h2>
-<p>Einige der genannten Anbieter sitzen in den USA (Google, GitHub, Wikimedia, KI-Anbieter). Soweit Daten dorthin gelangen, geschieht das im Rahmen der Angebote dieser Anbieter, die sich zum Teil dem EU-US Data Privacy Framework angeschlossen haben. Die Datenbank mit den Lehrpersonen-Daten liegt in Zürich.</p>
+<p>Einige der genannten Anbieter sitzen in den USA (Google, GitHub, Cloudflare, Wikimedia, KI-Anbieter) oder in Europa ausserhalb der Schweiz (Mistral AI in Frankreich, Tally in Belgien). Soweit Daten dorthin gelangen, geschieht das im Rahmen der Angebote dieser Anbieter, die sich zum Teil dem EU-US Data Privacy Framework angeschlossen haben. Die Datenbank mit den Lehrpersonen-Daten liegt in Zürich.</p>
 
 <h2>Cookies und Tracking</h2>
 <p>Es werden keine Tracking-Cookies und keine Analyse-Dienste eingesetzt. Technisch notwendige Angaben (Anmeldung, Einstellungen, Fortschritt) liegen im <code>localStorage</code> bzw. in den Mechanismen von Firebase für die Anmeldung.</p>
 
 <h2>Aufbewahrung und Löschung</h2>
-<p>Lehrpersonen können ihre Daten jederzeit exportieren und im Konto löschen lassen. Tägliche Sicherungen werden nach 30 Tagen automatisch entfernt. Lokale Daten auf dem Gerät löscht man über «Zurücksetzen» in der App oder durch Löschen der Browserdaten.</p>
+<p>Lehrpersonen können ihre Daten jederzeit exportieren und im Konto löschen lassen. Lightning-Sessions mit Antworten werden nach 30 Tagen automatisch gelöscht. Tägliche Sicherungen werden nach 30 Tagen automatisch entfernt. Die Zähler des KI-Zwischenservers (Anzahl Anfragen und Datenmengen pro Tag und App, ohne Texte) werden nach 60 Tagen entfernt. Lokale Daten auf dem Gerät löscht man über «Zurücksetzen» in der App oder durch Löschen der Browserdaten.</p>
 
 <h2>Deine Rechte</h2>
-<p>Du hast das Recht auf Auskunft, Berichtigung, Löschung und Herausgabe deiner Daten. Anfragen bitte über den Knopf «Feedback» in den Apps.</p>
+<p>Du hast das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Bearbeitung und Herausgabe deiner Daten sowie auf Widerruf einer erteilten Einwilligung. Anfragen bitte über den Knopf «Feedback» in den Apps.</p>
 
-<footer>Stand: 22. November 2026 · <a href="./">← Zurück zur Startseite</a></footer>
+<footer>Stand: 25. November 2026 · <a href="./">← Zurück zur Startseite</a></footer>
 </main></body></html>
